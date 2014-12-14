@@ -1,20 +1,16 @@
 # Serve static pages based on the host header
 
-This Dockerfile only exists to leverage from the pull & build in ansible. If you know a better solution, let me know.
+`docker pull marcbachmann/static-server`  
+`docker run -v $(pwd):/public -e SERVE_DIRECTORY=/public marcbachmann/node-static`
 
 
-    docker build -t marcbachmann/node-static-server .
-    docker run -v /Users/marcbachmann/Sites:/public marcbachmann/node-static /public
+```
+HOST: example.com
+```
+
+Will result in serving /public/example.com  
+Ports are ignored. So `example:8080` results in /public/example
 
 
-The following header will result in serving ./public/example.com
- 
-    HOST: example.com
-
-
-Ports are ignored. So `example.com:8080` results in ./public/example.com
-
-
-The server only accepts one argument at the moment.  
-You can pass the directory path which should be served.  
-e.g. `node index.js /Users/marcbachmann/Sites`.
+If you're using a load balancer, you can pass TRUST_PROY=true  
+`docker run -v $(pwd):/public -e TRUST_PROXY=true marcbachmann/node-static`

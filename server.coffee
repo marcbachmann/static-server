@@ -4,12 +4,12 @@ logger = new winston.Logger
   transports: [new (winston.transports.Console)(timestamp: true)]
 
 serveStatic = require('serve-static')
-directory = require('path').resolve(process.argv[2]) if process.argv[2]
+directory = require('path').resolve(dir) if dir = process.env.SERVE_DIRECTORY
 root =  directory || __dirname + '/public'
 
 app = require('express')()
 app.disable('x-powered-by')
-
+app.enable('trust proxy') if process.env.TRUST_PROXY
 
 app.use (req, res, next) ->
   logger.request("ip=#{req.ip} method=#{req.method} hostname=#{req.hostname} url=#{req.originalUrl} useragent=\"#{req.headers['user-agent']}\"")
