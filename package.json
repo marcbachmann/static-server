@@ -1,6 +1,7 @@
 {
   "name": "static-server",
   "description": "Server that serves directories based on the host header",
+  "readme": "# Serve static pages based on the host header\n\n`docker pull marcbachmann/node-static-server`  \n`docker run -v $(pwd):/public -e SERVE_DIRECTORY=/public marcbachmann/node-static`\n\n\n```\nHOST: example.com\n```\n\nWill result in serving /public/example.com  \nPorts are ignored. So `example:8080` results in /public/example\n\n\nYou can pass a directory that will be served.  \ne.g. `node index.js /Users/marcbachmann/Sites`.\n\n\n\nIf you're using a load balancer, you can pass TRUST_PROY=true\n\n`docker run -v $(pwd):/public -e TRUST_PROXY=true marcbachmann/node-static`",
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
