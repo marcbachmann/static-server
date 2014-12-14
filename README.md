@@ -12,5 +12,5 @@ Will result in serving /public/example.com
 Ports are ignored. So `example:8080` results in /public/example
 
 
-If you're using a load balancer, you can pass TRUST_PROY=true  
+If you're using a load balancer, you can pass TRUST_PROXY=loopback  
 `docker run -v $(pwd):/public -e TRUST_PROXY=true marcbachmann/node-static`

@@ -3,7 +3,7 @@ FROM google/nodejs:0.10.32
 RUN apt-get update -q && \
     DEBIAN_FRONTEND=noninteractive apt-get install -y \
     software-properties-common python-software-properties python-setuptools \
-    nano
+    procps nano
 
 RUN /usr/bin/easy_install supervisor supervisor-stdout
 ADD ./supervisord.conf /etc/supervisord.conf
