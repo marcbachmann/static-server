@@ -9,7 +9,7 @@ root =  directory || __dirname + '/public'
 
 app = require('express')()
 app.disable('x-powered-by')
-app.enable('trust proxy', process.env.TRUST_PROXY) if process.env.TRUST_PROXY
+app.set('trust proxy', process.env.TRUST_PROXY) if process.env.TRUST_PROXY
 
 app.use (req, res, next) ->
   logger.request("ip=#{req.ip} method=#{req.method} hostname=#{req.hostname} url=#{req.originalUrl} useragent=\"#{req.headers['user-agent']}\"")
