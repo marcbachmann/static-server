@@ -24,7 +24,13 @@ app.use (req, res, next) ->
 app.use (req, res, next) ->
   serveStatic("#{root}/default")(req, res, next)
 
-app.use (req, res, next) -> res.sendStatus(404)
+app.use (req, res, next) ->
+  req.path = '/'
+  res.status(404)
+  serveStatic("#{root}/default")(req, res, next)
+
+app.use (req, res, next) ->
+  res.sendStatus(404)
 
 
 require('dns').lookup require('os').hostname(), (err, host, fam) ->
