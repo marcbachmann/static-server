@@ -19,11 +19,12 @@ app.use(require('compression')())
 
 app.use (req, res, next) ->
   res.setHeader('X-Serve', req.hostname)
-  serveStatic("#{root}/#{req.hostname}")(req, res, next)
+  serveStatic("#{root}/#{req.hostname}", redirect: false)(req, res, next)
 
 app.use (req, res, next) ->
   req.url = '/'
   serve = serveStatic "#{root}/#{req.hostname}",
+    redirect: false
     setHeaders: (res, path) ->
       res.status(404)
   serve(req, res, next)
