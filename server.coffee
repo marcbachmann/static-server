@@ -22,11 +22,15 @@ app.use (req, res, next) ->
   serveStatic("#{root}/#{req.hostname}")(req, res, next)
 
 app.use (req, res, next) ->
-  serveStatic("#{root}/default")(req, res, next)
+  req.url = '/'
+  serve = serveStatic "#{root}/#{req.hostname}",
+    setHeaders: (res, path) ->
+      res.status(404)
+  serve(req, res, next)
+
 
 app.use (req, res, next) ->
-  req.path = '/'
-  res.status(404)
+  req.url = '/'
   serveStatic("#{root}/default")(req, res, next)
 
 app.use (req, res, next) ->
